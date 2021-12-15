@@ -35,7 +35,7 @@ CREATE TABLE `destinos` (
   `destAsientos` tinyint NOT NULL COMMENT 'Cantidad total de asientos',
   `destDisponibles` tinyint NOT NULL,
   `destActivo` tinyint NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `destinos`
@@ -61,7 +61,7 @@ INSERT INTO `destinos` (`idDestino`, `destNombre`, `idRegion`, `destPrecio`, `de
 CREATE TABLE `regiones` (
   `idRegion` tinyint UNSIGNED NOT NULL,
   `regNombre` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `regiones`
