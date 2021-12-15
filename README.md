@@ -22,7 +22,7 @@
 > Fue creado en 2011 por Taylor Otwell y tiene una gran influencia de frameworks como Ruby on Rails, Sinatra y ASP.NET MVC.  
 > Gran parte de Laravel está formado por dependencias, especialmente de Symfony, esto implica que el desarrollo de Laravel dependa también del desarrollo de sus dependencias.
 
->> ¿Porqué Elegir Laravel?
+> **¿Porqué Elegir Laravel?**  
 - [ ] Desarrollo más rápido
 - [ ] Menos escritura de código
 - [ ] Bibliotecas para tareas comunes

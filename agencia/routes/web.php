@@ -16,3 +16,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('peticion', accion);
+Route::get('/saludo', function ()
+{
+    return 'hola mundo desde Laravel';
+});
+Route::get('/test', function ()
+{
+    return view('prueba');
+});
+## pantalla de inicio del proyecto
+Route::get('/inicio', function ()
+{
+    return view('inicio');
+});
+Route::get('/imprimir', function ()
+{
+    //pasar datos a un vista
+    $nombre = 'marcos';
+    $marcas = ['Uniqlo', 'Nike', 'Razer', 'Intel', 'Xiaomi', 'AMD'];
+    return view('imprimir',
+                [
+                    'nombre'=>$nombre,
+                    'marcas'=>$marcas
+                ]
+            );
+});
