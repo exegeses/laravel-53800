@@ -101,5 +101,19 @@ Route::post('/modificarRegion', function ()
 ### CRUD de destinos
 Route::get('/adminDestinos', function ()
 {
-    return view('adminDestinos');
+    //obtenemos listado de destinos
+    /*$destinos = DB::select('
+                    SELECT idDestino, destNombre,
+                           regNombre,
+                           destPrecio
+                        FROM destinos as d
+                          JOIN regiones as r
+                          ON d.idRegion = r.idRegion
+                    ');*/
+    $destinos = DB::table('destinos as d')
+                    ->select('idDestino', 'destNombre', 'regNombre', 'destPrecio')
+                    ->join('regiones as r', 'd.idRegion', '=', 'r.idRegion')
+                    ->get();
+
+    return view('adminDestinos', [ 'destinos'=>$destinos ]);
 });
