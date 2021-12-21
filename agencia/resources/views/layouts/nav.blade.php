@@ -7,13 +7,13 @@
                 </a>
                 <!-- navegación -->
                 <nav class="navbar">
-                    <a href="adminRegiones" class="nav-link text-dark">Regiones</a>
-                    <a href="adminDestinos" class="nav-link text-dark">Destinos</a>
+                    <a href="/adminRegiones" class="nav-link text-dark">Regiones</a>
+                    <a href="/adminDestinos" class="nav-link text-dark">Destinos</a>
                 </nav>
                 <!-- login/register -->
                 <div>
-                    <a href="formLogin.php" class="btn btn-outline-dark">Login</a>
-                    <a href="formRegister.php" class="btn btn-outline-warning">Register</a>
+                    <a href="/formLogin.php" class="btn btn-outline-dark">Login</a>
+                    <a href="/formRegister.php" class="btn btn-outline-warning">Register</a>
                 </div>
             </div>
         </header>

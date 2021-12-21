@@ -73,8 +73,27 @@ Route::post('/agregarRegion', function ()
 Route::get('/modificarRegion/{id}', function ($idRegion)
 {
     //obtenemos detos de una región por su id
-    $region = DB::select('SELECT idRegion, regNombre
+    /*$region = DB::select('SELECT idRegion, regNombre
                             FROM regiones
-                            WHERE idRegion = :idRegion', [ $idRegion ]);
+                            WHERE idRegion = :idRegion', [ $idRegion ]);*/
+    $region = DB::table('regiones')
+                    ->where('idRegion', $idRegion)
+                    ->first();
     return view('modificarRegion', [ 'region' => $region ]);
+});
+Route::post('/modificarRegion', function ()
+{
+    $regNombre = $_POST['regNombre'];
+    $idRegion  = $_POST['idRegion'];
+    /*DB::update('UPDATE regiones
+                    SET regNombre = :regNombre
+                    WHERE idRegion = :idRegion',
+                         [ $regNombre, $idRegion ]);*/
+    DB::table('regiones')
+        ->where('idRegion', $idRegion)
+        ->update([ 'regNombre'=>$regNombre ]);
+    //retornar reporte de alta ok en nueva view
+    return redirect('/adminRegiones')
+        ->with([ 'mensaje'=>'Región: '.$regNombre.' modificada correctamente.' ]);
+
 });
