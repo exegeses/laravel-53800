@@ -97,3 +97,9 @@ Route::post('/modificarRegion', function ()
         ->with([ 'mensaje'=>'Región: '.$regNombre.' modificada correctamente.' ]);
 
 });
+############################
+### CRUD de destinos
+Route::get('/adminDestinos', function ()
+{
+    return view('adminDestinos');
+});
