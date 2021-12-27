@@ -26,9 +26,20 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        //
+        return view('/agregarMarca');
     }
 
+    private function validarForm(Request $request)
+    {
+        $request->validate(
+            [ 'mkNombre'=>'required|min:2|max:50' ],
+            [
+              'mkNombre.required'=>'El campo "Nombre de marca" es obligatorio.',
+              'mkNombre.min'=>'El campo "Nombre de marca" debe tener al menos 2 caractéres.',
+              'mkNombre.max'=>'El campo "Nombre de marca" debe tener 50 caractéres como máximo.'
+            ]
+        );
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +48,12 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //capturamos dato
+        $mkNombre = $request->mkNombre;
+        //validacion
+        $this->validarForm($request);
+        //........ guardamos en tabla
+        return 'aún no guardamos, pasó validación';
     }
 
     /**
