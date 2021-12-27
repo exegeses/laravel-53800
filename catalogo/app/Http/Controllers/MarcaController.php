@@ -49,11 +49,18 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         //capturamos dato
-        $mkNombre = $request->mkNombre;
+        //$mkNombre = $request->mkNombre;
         //validacion
         $this->validarForm($request);
-        //........ guardamos en tabla
-        return 'aún no guardamos, pasó validación';
+        //instanciamos el model
+        $Marca = new Marca;
+        //asignamos atributo
+        $Marca->mkNombre = $mkNombre = $request->mkNombre;
+        // guardamos en tabla
+        $Marca->save();
+        //redirecci´on con mensaje ok
+        return redirect('/adminMarcas')
+                ->with([ 'mensaje'=>'Marca: '.$mkNombre.' agregada correctamente' ]);
     }
 
     /**
