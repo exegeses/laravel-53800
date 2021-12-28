@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class MarcaController extends Controller
@@ -82,29 +83,78 @@ class MarcaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //obtenemos marca por su id
+        $Marca =  Marca::find($id);
+        return view('modificarMarca', [ 'Marca' => $Marca ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //validamos
+        $this->validarForm( $request );
+        //obtenemos datos de una marca
+        $Marca = Marca::find($request->idMarca);
+        //modificar atributos
+        $Marca->mkNombre = $mkNombre = $request->mkNombre;
+        //guardar
+        $Marca->save();
+        //redirección con mensaje ok
+        return redirect('/adminMarcas')
+            ->with([ 'mensaje'=>'Marca: '.$mkNombre.' modificada correctamente' ]);
+    }
+
+
+    /**
+     * método para chekear si hay un producto de una marca
+     * @param $idMarca
+     * @return Producto | null
+     */
+    private function productoPorMarca($idMarca)
+    {
+        //$check = Producto::where('idMarca', $idMarca)->first();
+        $check = Producto::firstWhere('idMarca', $idMarca);
+        //$check = Producto::where('idMarca', $idMarca)->count();
+        return  $check;
+    }
+
+    public function confirmarBaja($id)
+    {
+        //obtenemos datos de una marca
+        $Marca = Marca::find($id);
+
+        // si NO hay productos de esa marca {
+        if ( $this->productoPorMarca($id) == null ){
+            //retornamos vista de confirmación
+            return view('eliminarMarca', [ 'Marca'=>$Marca ]);
+        }
+
+        //redirección con mensaje que no se puede eliminar
+        return redirect('/adminMarcas')
+            ->with(
+                [
+                    'mensaje' => 'No se puede eliminar la marca "'.$Marca->mkNombre.'" ya que existen productos de esa marca.',
+                    'color' => 'danger'
+                ]
+            );
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Marca::destroy($request->idMarca);
+        //redirección con mensaje ok
+        return redirect('/adminMarcas')
+            ->with([ 'mensaje'=>'Marca: '.$request->mkNombre.' eliminada correctamente' ]);
+
     }
 }
