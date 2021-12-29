@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\Marca;
-//use App\Models\Categoria;
-//use App\Models\Producto;
-use App\Models\{ Producto, Marca, Categoria };
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class ProductoController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //obtenemos listado de productos
-        $productos = Producto::with([ 'getMarca', 'getCategoria' ])->paginate(6);
-        return view('adminProductos', [ 'productos'=>$productos ]);
+        //
     }
 
     /**
@@ -29,15 +24,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //obtenemos listados de marcas y categorías
-        $marcas = Marca::all();
-        $categorias = Categoria::all();
-        return view('agregarProducto',
-            [
-                'marcas'    =>$marcas,
-                'categorias'=>$categorias
-            ]
-        );
+        //
     }
 
     /**
@@ -54,10 +41,10 @@ class ProductoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto)
+    public function show(Categoria $categoria)
     {
         //
     }
@@ -65,10 +52,10 @@ class ProductoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit(Categoria $categoria)
     {
         //
     }
@@ -77,10 +64,10 @@ class ProductoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request, Categoria $categoria)
     {
         //
     }
@@ -88,10 +75,10 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(Categoria $categoria)
     {
         //
     }

@@ -29,3 +29,11 @@ Route::get('/modificarMarca/{id}', [ MarcaController::class, 'edit' ]);
 Route::patch('/modificarMarca', [ MarcaController::class, 'update' ]);
 Route::get('/eliminarMarca/{id}', [ MarcaController::class, 'confirmarBaja' ]);
 Route::delete('/eliminarMarca', [ MarcaController::class, 'destroy' ]);
+########################################
+###  CRUD de categorías
+
+########################################
+###  CRUD de productos
+use App\Http\Controllers\ProductoController;
+Route::get('/adminProductos', [ ProductoController::class, 'index' ]);
+Route::get('/agregarProducto', [ ProductoController::class, 'create' ]);
