@@ -134,21 +134,35 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit( $id )
     {
-        //
+        //obtenemos datos de un producto
+        $Producto = Producto::find($id);
+        //obtenemos listado de marcas y de categorías
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        return view('modificarProducto',
+            [
+                'Producto'  => $Producto,
+                'marcas'    => $marcas,
+                'categorias'=> $categorias
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request)
     {
-        //
+        //validamos
+        $this->validarForm($request);
+        //subir imagem
+        $prdImagen = $this->subirImagen($request);
+        //obtenemos datos de producto
     }
 
     /**
