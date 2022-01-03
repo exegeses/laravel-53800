@@ -75,8 +75,13 @@ class ProductoController extends Controller
 
     private function subirImagen(Request $request)
     {
-        //si no enviaron imagen
+        //si no enviaron imagen en store()
         $prdImagen = 'noDisponible.jpg';
+
+        //si no enviaron nada en update()
+        if( $request->has('imgActual') ){
+            $prdImagen = $request->imgActual;
+        }
 
         //si enviaron imagen -> subir archivo
         if( $request->file('prdImagen') ){
@@ -160,9 +165,22 @@ class ProductoController extends Controller
     {
         //validamos
         $this->validarForm($request);
-        //subir imagem
+        //subir imagem *
         $prdImagen = $this->subirImagen($request);
-        //obtenemos datos de producto
+        //obtenemos datos deproducto
+        $Producto = Producto::find( $request->idProducto );
+        //modificamos atribitos y guardamos
+        $Producto->prdNombre = $prdNombre = $request->prdNombre;
+        $Producto->prdPrecio = $request->prdPrecio;
+        $Producto->idMarca   = $request->idMarca;
+        $Producto->idCategoria = $request->idCategoria;
+        $Producto->prdPresentacion = $request->prdPresentacion;
+        $Producto->prdStock  = $request->prdStock;
+        $Producto->prdImagen = $prdImagen;
+        $Producto->save();
+        //redirección con mensaje ok
+        return redirect('adminProductos')
+            ->with(['mensaje'=>'Producto: '.$prdNombre.' agregado correctamente.']);
     }
 
     /**
