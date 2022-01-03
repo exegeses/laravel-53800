@@ -73,6 +73,23 @@ class ProductoController extends Controller
         );
     }
 
+    private function subirImagen(Request $request)
+    {
+        //si no enviaron imagen
+        $prdImagen = 'noDisponible.jpg';
+
+        //si enviaron imagen -> subir archivo
+        if( $request->file('prdImagen') ){
+            //renombrar   time() . extension
+            $extension = $request->file('prdImagen')->extension();
+            $prdImagen = time().'.'.$extension;
+            //subir archivo
+            $request->file('prdImagen')
+                    ->move( public_path('productos/'), $prdImagen );
+        }
+        return $prdImagen;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -82,11 +99,22 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //validamos
-
+        $this->validarForm($request);
         //subir imagen *
+        $prdImagen = $this->subirImagen($request);
         //instanciamos, asignamos y guardamos
+        $Producto = new Producto();
+        $Producto->prdNombre = $prdNombre = $request->prdNombre;
+        $Producto->prdPrecio = $request->prdPrecio;
+        $Producto->idMarca   = $request->idMarca;
+        $Producto->idCategoria = $request->idCategoria;
+        $Producto->prdPresentacion = $request->prdPresentacion;
+        $Producto->prdStock  = $request->prdStock;
+        $Producto->prdImagen = $prdImagen;
+        $Producto->save();
         //redirección con mensaje ok
-        return 'falta aun';
+        return redirect('adminProductos')
+                ->with(['mensaje'=>'Producto: '.$prdNombre.' agregado correctamente.']);
     }
 
     /**
